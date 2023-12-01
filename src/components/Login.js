@@ -88,11 +88,11 @@ const Login = () => {
         <img
           src={BG_URL}
           alt="logo"
-          className="absolute w-full"
+          className="absolute w-full h-screen object-cover"
         />
         <form
           onSubmit={(e) => e.preventDefault()}
-          className=" w-3/12 absolute p-8 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-md"
+          className="w-72 mt-20 md:w-3/12 absolute p-8 bg-black my-24 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-md"
         >
           <h1 className="font-bold text-3xl py-4">
             {isSignInForm ? "Sign In" : "Sign up"}
@@ -102,26 +102,26 @@ const Login = () => {
               ref={name}
               type="text"
               placeholder="Full Name"
-              className="w-full my-4 p-4 bg-gray-700"
+              className="w-full my-2 p-1 md:my-4 md:p-4 bg-gray-700"
             />
           )}
           <input
             ref={email}
             type="text"
             placeholder="Email or Phone Number"
-            className="w-full my-4 p-4 bg-gray-700"
+            className="w-full my-2 p-1 md:my-4 md:p-4 bg-gray-700"
           />
 
           <input
             ref={password}
             type="text"
             placeholder="Password"
-            className="w-full my-4 p-4 bg-gray-700"
+            className="w-full my-2 p-1 md:my-4 md:p-4 bg-gray-700"
           />
           <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
           <button
             onClick={handleButtonClick}
-            className="p-4 my-6 bg-red-700 w-full rounded-lg"
+            className="md:p-4 my-2 p-1 md:my-6 bg-red-700 w-full rounded-lg"
           >
             {isSignInForm ? "Sign In" : "Sign up"}
           </button>

@@ -60,7 +60,7 @@ const Header = () => {
         <div className="flex p-2 justify-between">
           {showGptSearch && (
             <select
-              className="p-2 m-2 bg-gray-900 text-white"
+              className="p-2 m-2 bg-gray-900 text-white rounded-md"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -71,7 +71,7 @@ const Header = () => {
             </select>
           )}
           <button
-            className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
+            className="py-1 md:py-2 px-2 md:px-4 mx-4 my-2 bg-gray-900 text-white rounded-lg"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
