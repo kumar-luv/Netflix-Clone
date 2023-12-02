@@ -84,7 +84,7 @@ const Header = () => {
         <div className="flex p-2 justify-between">
           {showGptSearch && (
             <select
-              className="hidden md:inline-block p-2 m-2 mx-0 h-9 my-2 bg-gray-700 text-white rounded-lg hover:bg-slate-500 hover:cursor-pointer"
+              className="inline-block p-2 m-2 mx-0 h-9 my-2 bg-gray-700 text-white rounded-lg hover:bg-slate-500 hover:cursor-pointer"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -95,19 +95,19 @@ const Header = () => {
             </select>
           )}
           <button
-            className="bg-gray-600 px-2 md:px-4 mx-2 md:mx-3 md:my-2 h-7 md:h-9 text-white text-sm font-semibold rounded-md md"
+            className="bg-gray-700 px-2  md:px-4 mx-2 md:mx-3 md:my-2 mt-3 h-8 md:h-9 text-white  hover:bg-slate-500 text-sm font-semibold rounded-md md"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           <img
-            className="w-7 md:w-9 md:mt-2 h-7 md:h-9 cursor-pointer rounded-md"
+            className="w-7 md:w-9  mt-3 md:mt-2 h-7 md:h-9 cursor-pointer rounded-md"
             alt="usericon"
             src={USER_AVATAR}
             onClick={toggleDropDown}
           />
           {isDropDownOpen && (
-            <div className="absolute bg-gray-800 text-gray-300  mt-12 w-30 md:w-40 hover:cursor-pointer  right-3 md:right-10 p-2 rounded-lg shadow-lg ">
+            <div className="absolute bg-gray-800 text-gray-300  mt-11 md:mt-12 w-30 md:w-40 hover:cursor-pointer  right-10 md:right-10 p-2 rounded-lg shadow-lg ">
               <ul className="list-none p-0">
                 <li className="text-sm py-1 md:py-2 px-2 md:px-2 border-b border-gray-600">
                   Hello {userName}

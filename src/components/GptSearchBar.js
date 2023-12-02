@@ -1,5 +1,5 @@
 import openai from "../utils/openai";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstants";
 import { API_OPTIONS } from "../utils/constants";
@@ -9,6 +9,7 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
+ 
 
   // search movie in TMDB
   const searchMovieTMDB = async (movie) => {
@@ -37,7 +38,7 @@ const GptSearchBar = () => {
     });
 
     if (!gptResults.choices) {
-      <p className="text-white font-bold text-3xl">No such Movies Found</p>
+      <p className="text-white font-bold text-3xl">No such Movies Found</p>;
     }
 
     // Andaz Apna Apna, Hera Pheri, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan
@@ -58,7 +59,7 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[50%] md:pt-[10%] flex justify-center ">
+    <div className="pt-[70%] md:pt-[10%] flex justify-center ">
       <form
         className="w-full md:w-1/2 bg-black grid grid-cols-12"
         onSubmit={(e) => e.preventDefault()}
@@ -73,7 +74,7 @@ const GptSearchBar = () => {
           className="col-span-3 m-4 py-2 px-2 md:px-4 bg-red-700 text-white rounded-lg"
           onClick={handleGptSearchClick}
         >
-          {lang[langKey].search}
+          { lang[langKey].search}
         </button>
       </form>
     </div>
