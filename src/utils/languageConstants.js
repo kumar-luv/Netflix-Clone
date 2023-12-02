@@ -11,6 +11,15 @@ const lang = {
       search: "buscar",
       gptSearchPlaceholder: "¿Qué te gustaría ver hoy?",
     },
+    punjabi: {
+      search: "ਖੋਜ",
+      gptSearchPlaceholder: "ਤੁਸੀਂ ਅੱਜ ਕੀ ਦੇਖਣਾ ਚਾਹੋਗੇ?",
+    },
+    bengali: {
+      search: "অনুসন্ধান",
+      gptSearchPlaceholder: "আপনি আজ কি দেখতে চান?",
+    }
+
   };
   
   export default lang;

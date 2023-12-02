@@ -1,20 +1,26 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LOGO, SUPPORTED_LANGUAGES ,USER_AVATAR } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
-import { toggleGptSearchView } from "../utils/gptSlice";
+import { toggleGptSearchView, removeGptMovieResult, removeOnToggleResult } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
-
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const user = useSelector((store) => store.user);
+  const userName = user?.displayName;
+
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const handleSignOut = () => {
+    dispatch(removeGptMovieResult());
+
     signOut(auth)
       .then(() => {})
       .catch((error) => {
@@ -44,23 +50,41 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   const handleGptSearchClick = () => {
-    // Toggle GPT Search
-    dispatch(toggleGptSearchView());
+    if (showGptSearch) {
+      dispatch(removeGptMovieResult());
+    } else {
+      dispatch(toggleGptSearchView());
+    }
+  };
+
+  const toggleDropDown = () => {
+    setIsDropDownOpen(!isDropDownOpen);
   };
 
   const handleLanguageChange = (e) => {
+    dispatch(removeOnToggleResult());
     dispatch(changeLanguage(e.target.value));
   };
 
   return (
-    <div className=" w-full px-8 py-2 bg-gradient-to-b from-black  flex flex-col md:flex-row justify-between fixed z-20">
-      <img className="w-44  mx-auto md:mx-0" src={LOGO} alt="logo" />
+    <div className=" w-full px-8 py-2 bg-gradient-to-b from-black  flex flex-col md:flex-row justify-between absolute z-20">
+      <div className="flex items-center">
+        <img className="w-28 mx-3 py-2 md:w-52 md:mx-0" src={LOGO} alt="logo" />
+        {user && (
+          <ul className="gap-6 ml-4 text-white text-sm hidden md:flex cursor-pointer text-left">
+            <Link to="/">Home</Link>
+            <Link to="/">TV Shows</Link>
+            <Link to="/">Movies</Link>
+            <Link to="/">Web series</Link>
+          </ul>
+        )}
+      </div>
 
       {user && (
         <div className="flex p-2 justify-between">
           {showGptSearch && (
             <select
-              className="p-2 m-2 bg-gray-900 text-white rounded-md"
+              className="hidden md:inline-block p-2 m-2 mx-0 h-9 my-2 bg-gray-700 text-white rounded-lg hover:bg-slate-500 hover:cursor-pointer"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -71,19 +95,34 @@ const Header = () => {
             </select>
           )}
           <button
-            className="py-1 md:py-2 px-2 md:px-4 mx-4 my-2 bg-gray-900 text-white rounded-lg"
+            className="bg-gray-600 px-2 md:px-4 mx-2 md:mx-3 md:my-2 h-7 md:h-9 text-white text-sm font-semibold rounded-md md"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           <img
-            className="hidden md:block w-10 h-10 mt-2 rounded-md"
+            className="w-7 md:w-9 md:mt-2 h-7 md:h-9 cursor-pointer rounded-md"
             alt="usericon"
             src={USER_AVATAR}
+            onClick={toggleDropDown}
           />
-          <button onClick={handleSignOut} className="font-bold text-white ml-1">
-            Sign Out
-          </button>
+          {isDropDownOpen && (
+            <div className="absolute bg-gray-800 text-gray-300  mt-12 w-30 md:w-40 hover:cursor-pointer  right-3 md:right-10 p-2 rounded-lg shadow-lg ">
+              <ul className="list-none p-0">
+                <li className="text-sm py-1 md:py-2 px-2 md:px-2 border-b border-gray-600">
+                  Hello {userName}
+                </li>
+                <li className="text-sm py-1 md:py-2 px-2 border-b border-gray-600">
+                  <button
+                    className="text-red-500 hover:text-red-700 focus:outline-none"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </div>

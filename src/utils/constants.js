@@ -21,6 +21,11 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
+  {identifier: "punjabi", name: "Punjabi"},
+  {identifier: "bengali", name: "Bengali"}
 ];
+
+export const MAX_WORDS = 30;
+export const MAX_TITLE= 3;
 
 export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
