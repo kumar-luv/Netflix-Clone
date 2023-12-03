@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
-import { toggleGptSearchView, removeGptMovieResult, removeOnToggleResult } from "../utils/gptSlice";
+import {
+  toggleGptSearchView,
+  removeGptMovieResult,
+  removeOnToggleResult,
+} from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 import { Link } from "react-router-dom";
 
@@ -65,19 +69,24 @@ const Header = () => {
     dispatch(removeOnToggleResult());
     dispatch(changeLanguage(e.target.value));
   };
+  const handleHome = () => {
+    dispatch(removeGptMovieResult());
+  }
 
   return (
     <div className=" w-full px-8 py-2 bg-gradient-to-b from-black  flex flex-col md:flex-row justify-between absolute z-20">
       <div className="flex items-center">
         <img className="w-28 mx-3 py-2 md:w-52 md:mx-0" src={LOGO} alt="logo" />
-        {user && (
-          <ul className="gap-6 ml-4 text-white text-sm hidden md:flex cursor-pointer text-left">
-            <Link to="/">Home</Link>
-            <Link to="/">TV Shows</Link>
-            <Link to="/">Movies</Link>
-            <Link to="/">Web series</Link>
-          </ul>
-        )}
+        <div>
+          {user && (
+            <ul className="gap-6 ml-4 text-white text-sm hidden md:flex cursor-pointer text-left z-50" onClick={handleHome}>
+              <Link to="/">Home</Link>
+              <Link to="/">TV Shows</Link>
+              <Link to="/">Movies</Link>
+              <Link to="/">Web series</Link>
+            </ul>
+          )}
+        </div>
       </div>
 
       {user && (
