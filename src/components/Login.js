@@ -118,7 +118,7 @@ const Login = () => {
             required
             ref={email}
             type="text"
-            placeholder="Email or Phone Number"
+            placeholder="Email Id"
             className="w-full my-3 p-1 md:my-4 md:p-4 bg-gray-700 rounded-md"
           />
 
