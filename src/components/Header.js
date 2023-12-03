@@ -79,11 +79,11 @@ const Header = () => {
         <img className="w-28 mx-3 py-2 md:w-52 md:mx-0" src={LOGO} alt="logo" />
         <div>
           {user && (
-            <ul className="gap-6 ml-4 text-white text-sm hidden md:flex cursor-pointer text-left z-50" onClick={handleHome}>
-              <Link to="/">Home</Link>
-              <Link to="/">TV Shows</Link>
-              <Link to="/">Movies</Link>
-              <Link to="/">Web series</Link>
+            <ul className="gap-6 ml-4 text-white text-sm  flex cursor-pointer text-left z-50" onClick={handleHome}>
+              <Link to="/" >Home</Link>
+              <Link to="/" className="hidden md:inline-block">TV Shows</Link>
+              <Link to="/" className="hidden md:inline-block">Movies</Link>
+              <Link to="/" className="hidden md:inline-block">Web series</Link>
             </ul>
           )}
         </div>
