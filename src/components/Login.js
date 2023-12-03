@@ -10,6 +10,8 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BG_URL } from "../utils/constants";
+import { GoEye } from "react-icons/go";
+import { GoEyeClosed } from "react-icons/go";
 
 const Login = () => {
   const [isSignInForm, setIsSigInForm] = useState(true);
@@ -81,6 +83,12 @@ const Login = () => {
   function toggleSignInForm() {
     setIsSigInForm(!isSignInForm);
   }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+    if (password.current) {
+      password.current.focus();
+    }
+  };
   return (
     <div className="relative w-full ">
       <Header />
@@ -122,6 +130,13 @@ const Login = () => {
               placeholder="Password"
               class="w-full my-3 p-1 md:my-4 md:p-4 bg-gray-700  rounded-md"
             />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer" onClick={togglePasswordVisibility}>
+              {showPassword ? (
+                <GoEyeClosed className="text-gray-400" />
+              ) : (
+                <GoEye className="text-gray-400" />
+              )}
+            </div>
           </div>
           <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
           <button
